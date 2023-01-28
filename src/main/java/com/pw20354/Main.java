@@ -3,17 +3,15 @@ package com.pw20354;
 import com.github.romankh3.image.comparison.ImageComparison;
 import com.github.romankh3.image.comparison.model.ImageComparisonResult;
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.*;
+import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.ScreenshotAnimations;
 import org.apache.commons.io.FileUtils;
 
 import javax.imageio.ImageIO;
-
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-import static java.awt.Color.magenta;
-
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.*;
+
+import static java.awt.Color.magenta;
 
 public class Main {
 
@@ -57,7 +55,7 @@ public class Main {
 
     /**
      * open browser, setup page, open page
-     * @param playwright
+     * @param playwright Playwright object
      * @return page
      */
     private static Page setupPage(Playwright playwright) {
@@ -89,14 +87,14 @@ public class Main {
     /**
      * Converts image stored as BufferedImage to byte array.
      *
-     * @param inputBufferedImage image stored as BufferedImage
-     * @param fileFormat         format for byte[] image, such as "png"
+     * @param imageBI image stored as BufferedImage
+     * @param fileFormat format for byte[] image, such as "png"
      * @return byte[] image
      */
-    public static byte[] convertBufferedImageToByteArray(BufferedImage diffBI, String fileFormat) {
+    public static byte[] convertBufferedImageToByteArray(BufferedImage imageBI, String fileFormat) {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            ImageIO.write(diffBI, fileFormat, byteArrayOutputStream);
+            ImageIO.write(imageBI, fileFormat, byteArrayOutputStream);
             return byteArrayOutputStream.toByteArray();
         } catch (IOException e) {
             System.out.println("Conversion from buffered image to byte array IOException");
