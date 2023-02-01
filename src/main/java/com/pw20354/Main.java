@@ -10,6 +10,7 @@ import org.apache.commons.io.FileUtils;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.Arrays;
 
 import static java.awt.Color.magenta;
 
@@ -60,6 +61,7 @@ public class Main {
      */
     private static Page setupPage(Playwright playwright) {
         Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
+                .setArgs(Arrays.asList("--font-render-hinting=none", "--disable-skia-runtime-opts", "--disable-font-subpixel-positioning", "--disable-lcd-text"))
                 .setHeadless(false));
         BrowserContext context = browser.newContext();
         Page page = context.newPage();
